@@ -1,0 +1,57 @@
+name: Release
+
+# Push a tag like v0.1.1 (e.g. `npm version patch && git push --follow-tags`) to build the
+# universal dmg and publish it as a GitHub Release.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Tag matches package.json version
+        run: |
+          VERSION="v$(node -p "require('./package.json').version")"
+          if [ "$VERSION" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $VERSION"
+            exit 1
+          fi
+
+      - run: npm ci
+      - name: Build native helper
+        run: npm run build:helper
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+
+      - name: Build universal dmg
+        run: npm run build:mac
+        env:
+          # Only used when you switch to Developer ID signing (README › 경고 없이 설치되게 하려면).
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NOTES="docs/releases/${GITHUB_REF_NAME}.md"
+          if [ -f "$NOTES" ]; then NOTES_ARGS=(--notes-file "$NOTES"); else NOTES_ARGS=(--generate-notes); fi
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" release/*.dmg --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" release/*.dmg --title "Digital Desk ${GITHUB_REF_NAME#v}" "${NOTES_ARGS[@]}"
+          fi

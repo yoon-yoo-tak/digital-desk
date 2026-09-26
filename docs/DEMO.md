@@ -24,8 +24,10 @@ PRODUCT §43의 시연을 그대로 재현하기 위한 절차다. 2026-09-26에
 
 ```bash
 npm install
-npm run build:mac                     # → release/mac-arm64/Digital Desk.app
+npm run build:mac:dir                 # → release/mac-arm64/Digital Desk.app (빠른 로컬 빌드)
 ```
+
+(또는 Releases의 dmg를 설치했다면 아래 경로를 `/Applications/Digital Desk.app`으로 바꿔 쓴다.)
 
 데모 전용 프로필로 실행한다. 데이터 폴더는 `~/Library/Application Support/Digital Desk (Demo)`이다. 처음 실행하면 데모 데이터 49개가 자동으로 들어가고 온보딩은 건너뛴다.
 

@@ -1,11 +1,14 @@
 appId: app.digitaldesk.mac
 productName: Digital Desk
+copyright: Copyright © 2026 yoon-yoo-tak
 directories:
   buildResources: build
   output: release
 files:
   - out/**
   - package.json
+  # better-sqlite3 ships prebuilt binaries for every OS; only the macOS ones are needed.
+  - '!**/node_modules/better-sqlite3/prebuilds/{linux,linuxmusl,win32}-*'
 extraResources:
   - from: resources/bin
     to: bin
@@ -17,9 +20,30 @@ asarUnpack:
   - node_modules/better-sqlite3/**
 mac:
   category: public.app-category.productivity
-  target: dir
-  identity: null
+  icon: build/icon.png
+  target:
+    - target: dmg
+      arch: universal
+  # Ad-hoc signature: without any signature a downloaded Apple Silicon app is reported as "damaged"
+  # and can't be opened at all; ad-hoc signed, users can allow it once in Privacy & Security.
+  # For a warning-free install, set a Developer ID identity and notarize (README › Distribution).
+  identity: '-'
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  # Already architecture-complete, so identical in both slices: the universal helper binary and
+  # better-sqlite3's per-architecture prebuilds (each build carries both .node files).
+  x64ArchFiles: '{Contents/Resources/bin/desk-helper,Contents/Resources/app.asar.unpacked/node_modules/better-sqlite3/prebuilds/*.node}'
   extendInfo:
     LSUIElement: false
     NSDesktopFolderUsageDescription: Digital Desk records new screenshots saved to your Desktop.
     NSDownloadsFolderUsageDescription: Digital Desk records files you download.
+dmg:
+  title: Digital Desk ${version}
+  artifactName: Digital-Desk-${version}-universal.${ext}
+  contents:
+    - x: 170
+      y: 190
+    - x: 490
+      y: 190
+      type: link
+      path: /Applications

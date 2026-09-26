@@ -29,7 +29,10 @@
 |---|---|
 | `npm run dev` | 헬퍼와 트레이 아이콘을 빌드한 뒤(`predev`) 개발 실행. 데이터는 `~/Library/Application Support/Digital Desk (Dev)` |
 | `npm run build` | 헬퍼·아이콘·main/preload/renderer 번들(`out/`) |
-| `npm run build:mac` | 서명 없는 .app(`release/mac-arm64/`). M1에서 실행과 클립보드 캡처까지 확인함 |
+| `npm run build:mac` | 배포용 universal `.dmg`(`release/Digital-Desk-<version>-universal.dmg`, ad-hoc 서명) |
+| `npm run build:mac:dir` | 빠른 로컬 확인용 `.app`(`release/mac-arm64/`, Apple Silicon만) |
+| 릴리스 | `npm version patch && git push --follow-tags` → GitHub Actions(`release.yml`)가 dmg를 빌드해 Release에 올린다. 노트는 `docs/releases/v<버전>.md`. CI(`ci.yml`)는 master push와 PR마다 typecheck·lint·test를 돈다 |
+| `npm run make-icon` | `build/icon.png`(앱 아이콘) 다시 생성 |
 | `npm run typecheck` / `npm run lint` / `npm test` | tsc(node+web) / eslint / vitest(단위+SQLite 통합) |
 | `npm run build:helper` | `native/desk-helper` → `resources/bin/desk-helper`(소스가 바뀌었을 때만 다시 빌드, `FORCE=1`이면 강제) |
 | `npm run build:tray-icons` | `design/icons/app-mark*.svg` → `resources/tray/*Template.png` |
@@ -49,7 +52,7 @@
 - 개발 실행도 **실제** `~/Desktop`(스크린샷 폴더)과 `~/Downloads`를 감시한다. 테스트 파일은 `desk-test-` 접두어로 만들고, 끝나면 Finder로 휴지통에 옮긴다(`rm` 대신, 되돌릴 수 있게).
 - 실제 스크린샷 테스트: ⌘⇧4를 CGEvent로 보내고 마우스 드래그로 영역을 지정한다. `screencapture` CLI는 쓰지 않는다. 파일은 플로팅 썸네일 때문에 몇 초 뒤에 생긴다.
 - 실제 다운로드 테스트: 로컬 서버가 `Content-Disposition: attachment`로 천천히 보내게 하고 Chrome으로 연다. 이 Mac의 Chrome은 저장 위치를 묻는다. 저장 대화상자의 위치는 "폴더로 이동"(⌘⇧G) 시트의 텍스트 필드에 AX로 값을 넣어 바꾼다(한국어 IME에서는 `~`가 제대로 입력되지 않는다). **Chrome은 마지막 저장 위치를 기억하므로, 테스트 뒤에는 원래 위치(데스크탑)로 되돌려 둔다.**
-- 패키지 앱 검증: `DESK_USER_DATA=<dir> "release/mac-arm64/Digital Desk.app/Contents/MacOS/Digital Desk" --remote-debugging-port=9222`로 셸에서 실행하면 CDP를 쓸 수 있다(TCC 권한은 터미널에 귀속된다). 종료는 `osascript -e 'quit app "Digital Desk"'`로 한다.
+- 패키지 앱 검증: `npm run build:mac:dir` 후 `DESK_USER_DATA=<dir> "release/mac-arm64/Digital Desk.app/Contents/MacOS/Digital Desk" --remote-debugging-port=9222`로 셸에서 실행하면 CDP를 쓸 수 있다(TCC 권한은 터미널에 귀속된다). 종료는 `osascript -e 'quit app "Digital Desk"'`로 한다.
 - main 프로세스에서 잡히지 않은 예외는 Electron 오류 **대화상자**가 되어 종료까지 막는다. 종료 중에는 창이 파괴되므로 `isDestroyed()`를 확인한다.
 - OCR은 새로 빌드한 헬퍼의 첫 인식에 약 25초가 걸린다(예열로 가림). `npm run build:helper`로 다시 빌드한 직후 OCR이 느린 것은 정상이다.
 
