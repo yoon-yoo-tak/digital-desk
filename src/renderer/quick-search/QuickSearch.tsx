@@ -127,9 +127,15 @@ export function QuickSearch(): React.JSX.Element {
   const selected = list.find((i) => i.id === selectedId) ?? list[0] ?? null
   const selectedHit = hits.find((h) => h.item.id === selected?.id) ?? null
 
+  const selectedIsFirst = selected !== null && selected === list[0]
   useEffect(() => {
-    if (selected) document.getElementById(optionId(selected.id))?.scrollIntoView({ block: 'nearest' })
-  }, [selected])
+    if (!selected) return
+    // The first row scrolls to the very top so its group header shows too. The first results arrive
+    // while the panel is still compact, and "nearest" would leave the list scrolled once it grows.
+    const scroller = document.getElementById('quick-search-results')
+    if (selectedIsFirst && scroller) scroller.scrollTop = 0
+    else document.getElementById(optionId(selected.id))?.scrollIntoView({ block: 'nearest' })
+  }, [selected, selectedIsFirst])
 
   // ── Window size: results are fixed, other states fit their content ──
   useLayoutEffect(() => {
