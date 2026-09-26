@@ -1,0 +1,100 @@
+.toolbar {
+  height: var(--toolbar-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: 0 var(--sp-4) 0 var(--sp-5);
+  background: var(--bg-chrome);
+  border-bottom: 1px solid var(--border);
+  -webkit-app-region: drag;
+}
+
+.toolbar button {
+  -webkit-app-region: no-drag;
+}
+
+/* Room for the traffic lights (hiddenInset) plus the 24px gap from the mockup. */
+.lights {
+  width: 76px;
+  flex-shrink: 0;
+}
+
+.segments {
+  display: flex;
+  padding: 2px;
+  border-radius: 8px;
+  background: var(--segment-track);
+}
+
+.segment,
+.segmentActive {
+  height: 26px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12.5px;
+}
+
+.segmentActive {
+  background: var(--bg-card);
+  color: var(--text);
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.spacer {
+  flex: 1;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1-5);
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-2);
+  font-size: var(--fs-meta);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 4px;
+  background: var(--status-dot);
+}
+
+.pauseGlyph {
+  color: var(--text-2);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 260px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-3);
+  font-size: var(--fs-body);
+  text-align: left;
+}
+
+.searchLabel {
+  flex: 1;
+}
+
+.kbd {
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--fill);
+}

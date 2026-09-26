@@ -1,0 +1,25 @@
+appId: app.digitaldesk.mac
+productName: Digital Desk
+directories:
+  buildResources: build
+  output: release
+files:
+  - out/**
+  - package.json
+extraResources:
+  - from: resources/bin
+    to: bin
+  - from: resources/tray
+    to: tray
+  - from: resources/demo
+    to: demo
+asarUnpack:
+  - node_modules/better-sqlite3/**
+mac:
+  category: public.app-category.productivity
+  target: dir
+  identity: null
+  extendInfo:
+    LSUIElement: false
+    NSDesktopFolderUsageDescription: Digital Desk records new screenshots saved to your Desktop.
+    NSDownloadsFolderUsageDescription: Digital Desk records files you download.

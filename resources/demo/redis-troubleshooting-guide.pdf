@@ -1,0 +1,42 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 428 >>
+stream
+BT /F1 28 Tf 72 740 Td
+(Redis Troubleshooting Guide) Tj
+/F1 13 Tf 0 -44 Td 18 TL
+(1. Connection refused on port 6379) '
+(   - Is redis-server running? Try: redis-cli ping) '
+(   - Check bind / protected-mode in redis.conf) '
+(2. Timeouts under load) '
+(   - Raise the client timeout; check slowlog and latency monitor) '
+(3. RedisConnectionFailureException in Spring) '
+(   - Verify spring.data.redis.host / port / timeout) '
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+790
+%%EOF

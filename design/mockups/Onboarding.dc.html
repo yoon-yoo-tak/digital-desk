@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Onboarding — 4 steps</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;background:#CFCBC3;-webkit-font-smoothing:antialiased;color:#1C1B19}
+a{color:#A85A0A}a:hover{color:#7E4306}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.win{width:480px;height:460px;border-radius:12px;background:#FBFAF8;box-shadow:0 20px 50px rgba(0,0,0,0.20),0 0 0 1px rgba(0,0,0,0.10);display:flex;flex-direction:column;overflow:hidden}
+.tl{display:flex;gap:8px;padding:14px 16px 0}
+.tl span{width:12px;height:12px;border-radius:6px;background:#DAD7D1}
+.body{flex-grow:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:0 48px;text-align:center}
+.h1{font-size:24px;font-weight:600;letter-spacing:-0.015em;line-height:1.25;margin:0}
+.p{font-size:14px;line-height:1.5;color:#5F5C56;margin:0}
+.foot{display:flex;align-items:center;padding:0 24px 24px}
+.dots{display:flex;gap:6px}
+.dots span{width:6px;height:6px;border-radius:3px;background:#DAD7D1}
+.go{margin-left:auto;height:32px;padding:0 16px;border-radius:8px;border:none;background:#1C1B19;color:#FBFAF8;font:inherit;font-size:13px;font-weight:600}
+.big{width:64px;height:64px;border-radius:16px;background:#EEECE8;display:flex;align-items:center;justify-content:center;color:#1C1B19}
+.k{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border-radius:6px;background:#FFFFFF;border:1px solid #DAD7D1;box-shadow:0 1px 0 #DAD7D1;font-size:14px}
+</style>
+</helmet>
+<div style="width: 2120px; height: 540px; box-sizing: border-box; padding: 40px; display: flex; gap: 40px; background: #CFCBC3">
+
+<section class="win" aria-label="Step 1 of 4">
+<div class="tl" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="body">
+<div class="big"><svg width="34" height="34" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9.5h3l1 1.75h3l1-1.75h3"></path><path d="M2.5 9.5L4.25 4h7.5l1.75 5.5v3.5h-11z"></path></svg></div>
+<h1 class="h1">Digital Desk remembers<br>the things you touch.</h1>
+<p class="p">Copy, screenshot and download the way you always do.<br>Find any of it later from one search.</p>
+</div>
+<div class="foot"><div class="dots" aria-hidden="true"><span style="background: #1C1B19"></span><span></span><span></span><span></span></div><button class="go">Continue</button></div>
+</section>
+
+<section class="win" aria-label="Step 2 of 4">
+<div class="tl" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="body">
+<div class="big"><svg width="30" height="30" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="2.5" width="9" height="11.5" rx="1.5"></rect><path d="M6 6h4M6 8.5h4M6 11h2.5"></path></svg></div>
+<h1 class="h1">Clipboard</h1>
+<p class="p">Digital Desk watches your clipboard so you can find copied text, links and images later.</p>
+<div style="display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 10px; background: #F2E8DA; font-size: 13px; color: #1C1B19">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#A85A0A" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"></rect><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"></path></svg>
+Everything stays on this Mac. No account, no cloud.</div>
+<p class="p" style="font-size: 12.5px">Password managers and Keychain are never captured.</p>
+</div>
+<div class="foot"><div class="dots" aria-hidden="true"><span></span><span style="background: #1C1B19"></span><span></span><span></span></div><button class="go">Continue</button></div>
+</section>
+
+<section class="win" aria-label="Step 3 of 4">
+<div class="tl" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="body" style="align-items: stretch; text-align: left; gap: 16px">
+<h1 class="h1" style="text-align: center">Where do your files land?</h1>
+<p class="p" style="text-align: center">We found these folders. New files there show up on your desk. Nothing is moved or copied.</p>
+<div style="border-radius: 10px; border: 1px solid #E4E2DD; background: #FFFFFF; display: flex; flex-direction: column">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px">
+<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#5F5C56" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5v-2a1 1 0 0 1 1-1h2M10.5 2.5h2a1 1 0 0 1 1 1v2M13.5 10.5v2a1 1 0 0 1-1 1h-2M5.5 13.5h-2a1 1 0 0 1-1-1v-2"></path></svg>
+<div style="flex-grow: 1"><div style="font-size: 13px; font-weight: 500">Screenshots</div><div class="mono" style="font-size: 11.5px; color: #5F5C56">~/Desktop</div></div>
+<button style="height: 26px; padding: 0 10px; border-radius: 6px; border: 1px solid #DAD7D1; background: #FFFFFF; color: #1C1B19; font: inherit; font-size: 12.5px">Change…</button>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid #EEECE8">
+<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#5F5C56" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v8M5 7.5l3 3 3-3M3 13.5h10"></path></svg>
+<div style="flex-grow: 1"><div style="font-size: 13px; font-weight: 500">Downloads</div><div class="mono" style="font-size: 11.5px; color: #5F5C56">~/Downloads</div></div>
+<button style="height: 26px; padding: 0 10px; border-radius: 6px; border: 1px solid #DAD7D1; background: #FFFFFF; color: #1C1B19; font: inherit; font-size: 12.5px">Change…</button>
+</div>
+</div>
+</div>
+<div class="foot"><div class="dots" aria-hidden="true"><span></span><span></span><span style="background: #1C1B19"></span><span></span></div><button class="go">Continue</button></div>
+</section>
+
+<section class="win" aria-label="Step 4 of 4">
+<div class="tl" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="body">
+<h1 class="h1">You’re ready.</h1>
+<p class="p">Copy something. Take a screenshot. Download a file.<br>We’ll remember it.</p>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 10px; padding: 18px 24px; border-radius: 12px; background: #EEECE8">
+<div style="display: flex; gap: 6px"><span class="k">⌘</span><span class="k">⇧</span><span class="k">Space</span></div>
+<div style="font-size: 13px; color: #3B3934">opens Quick Search from anywhere</div>
+</div>
+</div>
+<div class="foot"><div class="dots" aria-hidden="true"><span></span><span></span><span></span><span style="background: #1C1B19"></span></div><button class="go" style="background: #A85A0A">Start using Digital Desk</button></div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":2120,"height":540}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

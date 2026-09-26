@@ -1,0 +1,116 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Desk.dc.html": {
+      "h": 800,
+      "title": "Main window — Desk",
+      "w": 1280,
+      "x": 1360,
+      "y": 1640
+    },
+    "Foundations.dc.html": {
+      "h": 1200,
+      "title": "Foundations",
+      "w": 1280,
+      "x": 1680,
+      "y": 2840
+    },
+    "Library.dc.html": {
+      "h": 800,
+      "title": "Main window — Inbox",
+      "w": 1280,
+      "x": 0,
+      "y": 1640
+    },
+    "Main.dc.html": {
+      "h": 900,
+      "title": "Quick Search — results",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "MenuBar.dc.html": {
+      "h": 480,
+      "title": "Menu bar — capture & pause",
+      "w": 760,
+      "x": 0,
+      "y": 2840
+    },
+    "Onboarding.dc.html": {
+      "h": 540,
+      "title": "Onboarding — 4 steps",
+      "w": 2120,
+      "x": 0,
+      "y": 4440
+    },
+    "SearchStates.dc.html": {
+      "h": 1240,
+      "title": "Quick Search — states",
+      "w": 900,
+      "x": 1520,
+      "y": 0
+    },
+    "Settings.dc.html": {
+      "h": 800,
+      "title": "Settings — Capture",
+      "w": 760,
+      "x": 840,
+      "y": 2840
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-09-26T08:45:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {
+    "row1": {
+      "kind": "title1",
+      "maxW": 2420,
+      "text": "Quick Search · ⌘⇧Space",
+      "w": 240,
+      "x": 0,
+      "y": -300
+    },
+    "row2": {
+      "kind": "title1",
+      "maxW": 2640,
+      "text": "Main window",
+      "w": 240,
+      "x": 0,
+      "y": 1340
+    },
+    "row3": {
+      "kind": "title1",
+      "maxW": 2960,
+      "text": "System surfaces & foundations",
+      "w": 240,
+      "x": 0,
+      "y": 2540
+    },
+    "row4": {
+      "kind": "title1",
+      "maxW": 2120,
+      "text": "First run",
+      "w": 240,
+      "x": 0,
+      "y": 4140
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "SearchStates.dc.html",
+    "Library.dc.html",
+    "Desk.dc.html",
+    "MenuBar.dc.html",
+    "Settings.dc.html",
+    "Foundations.dc.html",
+    "Onboarding.dc.html"
+  ],
+  "pages": [],
+  "title": "Digital Desk — UI Design"
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Foundations</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo",system-ui,sans-serif;background:#FBFAF8;-webkit-font-smoothing:antialiased;color:#1C1B19}
+a{color:#A85A0A}a:hover{color:#7E4306}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.h{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#7A766F;margin-bottom:14px}
+.sw{display:flex;align-items:center;gap:12px;height:40px}
+.chip{width:40px;height:32px;border-radius:7px;flex-shrink:0;border:1px solid rgba(0,0,0,0.10)}
+.nm{font-size:13px;font-weight:500;width:130px}
+.v{font-size:11.5px;color:#5F5C56}
+.ic{display:flex;flex-direction:column;align-items:center;gap:8px;width:84px;font-size:11.5px;color:#5F5C56}
+.ib{width:40px;height:40px;border-radius:9px;background:#EEECE8;display:flex;align-items:center;justify-content:center;color:#3B3934}
+.k{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;box-sizing:border-box;border-radius:5px;background:#FFFFFF;border:1px solid #DAD7D1;box-shadow:0 1px 0 #DAD7D1;font-size:12px}
+.kr{display:flex;align-items:center;gap:10px;height:34px;font-size:13px}
+.kr .ks{width:120px;display:flex;gap:4px}
+</style>
+</helmet>
+<div style="width: 1280px; height: 1200px; box-sizing: border-box; padding: 56px 64px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 64px; row-gap: 48px; align-content: start; background: #FBFAF8">
+
+<section aria-label="Quick Search panel colors">
+<div class="h">Panel · dark vibrancy (Quick Search)</div>
+<div style="border-radius: 14px; background: #1E1E21; padding: 16px 20px; display: flex; flex-direction: column; color: #F2F1EE">
+<div class="sw"><div class="chip" style="background: rgba(30,30,33,0.82); border-color: rgba(255,255,255,0.14)"></div><div class="nm">panel</div><div class="v mono" style="color: rgba(242,241,238,0.64)">rgba(30,30,33,.82) + blur 40 · sat 170%</div></div>
+<div class="sw"><div class="chip" style="background: #F2F1EE"></div><div class="nm">text</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#F2F1EE</div></div>
+<div class="sw"><div class="chip" style="background: rgba(242,241,238,0.64)"></div><div class="nm">text-2</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#F2F1EE @ 64%</div></div>
+<div class="sw"><div class="chip" style="background: rgba(242,241,238,0.5)"></div><div class="nm">text-3</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#F2F1EE @ 50% — times, section labels</div></div>
+<div class="sw"><div class="chip" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.14)"></div><div class="nm">selected</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#FFF @ 12%</div></div>
+<div class="sw"><div class="chip" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14)"></div><div class="nm">hairline / fill</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#FFF @ 7%</div></div>
+<div class="sw"><div class="chip" style="background: #F0A94B"></div><div class="nm">accent</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#F0A94B — primary button, caret, status</div></div>
+<div class="sw"><div class="chip" style="background: rgba(240,169,75,0.32)"></div><div class="nm">match</div><div class="v mono" style="color: rgba(242,241,238,0.64)">#F0A94B @ 32% — search highlight</div></div>
+</div>
+</section>
+
+<section aria-label="Window colors">
+<div class="h">Window · light (Inbox, Desk, Settings)</div>
+<div style="border-radius: 14px; background: #FFFFFF; border: 1px solid #E4E2DD; padding: 16px 20px; display: flex; flex-direction: column">
+<div class="sw"><div class="chip" style="background: #FBFAF8"></div><div class="nm">bg</div><div class="v mono">#FBFAF8</div></div>
+<div class="sw"><div class="chip" style="background: #F3F2EF"></div><div class="nm">chrome</div><div class="v mono">#F3F2EF — toolbar, inspector #F7F6F3</div></div>
+<div class="sw"><div class="chip" style="background: #E4E2DD"></div><div class="nm">line</div><div class="v mono">#E4E2DD</div></div>
+<div class="sw"><div class="chip" style="background: #1C1B19"></div><div class="nm">text</div><div class="v mono">#1C1B19</div></div>
+<div class="sw"><div class="chip" style="background: #5F5C56"></div><div class="nm">text-2</div><div class="v mono">#5F5C56</div></div>
+<div class="sw"><div class="chip" style="background: #7A766F"></div><div class="nm">text-3</div><div class="v mono">#7A766F</div></div>
+<div class="sw"><div class="chip" style="background: #F2E8DA"></div><div class="nm">selected</div><div class="v mono">#F2E8DA</div></div>
+<div class="sw"><div class="chip" style="background: #A85A0A"></div><div class="nm">accent</div><div class="v mono">#A85A0A — links, toggles, menu highlight</div></div>
+</div>
+</section>
+
+<section aria-label="Type">
+<div class="h">Type · SF Pro (system) + JetBrains Mono for code and OCR</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">22 / regular</div><div style="font-size: 22px; letter-spacing: -0.01em">Search your desk…</div></div>
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">15 / semibold</div><div style="font-size: 15px; font-weight: 600">Inspector title, pile name</div></div>
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">14 / medium</div><div style="font-size: 14px; font-weight: 500">Row title — RedisConnectionFailureException</div></div>
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">12.5 / mono</div><div class="mono" style="font-size: 12.5px">Copied code — spring.data.redis.timeout: 5s</div></div>
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">12 / regular</div><div style="font-size: 12px; color: #5F5C56">Row meta — Screenshot · IntelliJ IDEA</div></div>
+<div style="display: flex; align-items: baseline; gap: 16px"><div class="v mono" style="width: 96px">11 / caps</div><div style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #7A766F">Top match · Same session</div></div>
+</div>
+</section>
+
+<section aria-label="Item icons">
+<div class="h">Item types · one neutral icon each, no type colors</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="2.5" width="9" height="11.5" rx="1.5"></rect><path d="M6 6h4M6 8.5h4M6 11h2.5"></path></svg></div>text</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5l3-3"></path><path d="M7.5 4.5l1-1a2.5 2.5 0 0 1 3.5 3.5l-1 1"></path><path d="M8.5 11.5l-1 1a2.5 2.5 0 0 1-3.5-3.5l1-1"></path></svg></div>link</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="9" rx="1.5"></rect><circle cx="6" cy="6.5" r="1"></circle><path d="M3 11.5l3.5-3 2.5 2 2-1.5 2.5 2"></path></svg></div>image</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path></svg></div>file</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5v-2a1 1 0 0 1 1-1h2M10.5 2.5h2a1 1 0 0 1 1 1v2M13.5 10.5v2a1 1 0 0 1-1 1h-2M5.5 13.5h-2a1 1 0 0 1-1-1v-2"></path></svg></div>screenshot</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5L8 2.5l5.5 3L8 8.5z"></path><path d="M2.5 8.5L8 11.5l5.5-3"></path><path d="M2.5 11.2L8 14.2l5.5-3"></path></svg></div>context</div>
+<div class="ic"><div class="ib"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9.5h3l1 1.75h3l1-1.75h3"></path><path d="M2.5 9.5L4.25 4h7.5l1.75 5.5v3.5h-11z"></path></svg></div>app mark</div>
+</div>
+<div class="v" style="margin-top: 14px">Screenshots and images show a 32px thumbnail in place of the icon. 16px stroke icons, 1.4 stroke, round caps, on a 32px tile (radius 7).</div>
+</section>
+
+<section aria-label="Result row anatomy">
+<div class="h">Result row · 48 in panel, 52 in window</div>
+<div style="border-radius: 14px; background: #1E1E21; padding: 20px; color: #F2F1EE; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px; border-radius: 8px; background: rgba(255,255,255,0.12); outline: 1px dashed rgba(240,169,75,0.6); outline-offset: 3px">
+<div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 7px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; color: rgba(242,241,238,0.78)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5l3-3"></path><path d="M7.5 4.5l1-1a2.5 2.5 0 0 1 3.5 3.5l-1 1"></path><path d="M8.5 11.5l-1 1a2.5 2.5 0 0 1-3.5-3.5l1-1"></path></svg></div>
+<div style="flex-grow: 1; min-width: 0"><div style="font-size: 14px; font-weight: 500"><span style="background: rgba(240,169,75,0.32); border-radius: 3px; padding: 0 1px">Redis</span> timeout and connection errors</div><div style="font-size: 12px; color: rgba(242,241,238,0.64)">redis.io · Chrome</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">14:07</div>
+</div>
+<div class="mono" style="display: flex; gap: 12px; font-size: 11px; color: rgba(242,241,238,0.64); padding: 4px 10px 0">
+<span>pad 10</span><span>·</span><span>icon 32</span><span>·</span><span>gap 12</span><span>·</span><span>title 1 line, ellipsis</span><span>·</span><span>meta = type/domain · app</span><span>·</span><span>time right</span>
+</div>
+</div>
+</section>
+
+<section aria-label="Keyboard">
+<div class="h">Keyboard · shortcut → type → enter</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px">
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">⇧</span><span class="k">Space</span></div>Quick Search</div>
+<div class="kr"><div class="ks"><span class="k">↑</span><span class="k">↓</span></div>Move selection</div>
+<div class="kr"><div class="ks"><span class="k">↵</span></div>Open</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">↵</span></div>Reveal in Finder</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">Y</span></div>Quick Look</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">C</span></div>Copy item</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">P</span></div>Pin to Desk</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">⌫</span></div>Delete item (window)</div>
+<div class="kr"><div class="ks"><span class="k">⌘</span><span class="k">1–5</span></div>Filter by type</div>
+<div class="kr"><div class="ks"><span class="k">esc</span></div>Clear, then close</div>
+</div>
+</section>
+
+<section aria-label="Spacing and shape" style="grid-column: span 2">
+<div class="h">Shape &amp; motion</div>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; font-size: 13px">
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-weight: 600">4pt grid</div><div class="v">Gaps 4 · 6 · 8 · 12 · 16 · 20. Panel side padding 20.</div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-weight: 600">Radius</div><div class="v">Panel 16 · window pile 12 · preview 10 · row 8 · button 7 · chip 13 (pill)</div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-weight: 600">Panel size</div><div class="v">860 × 588, top at 22% of screen height. 760 wide without the preview pane.</div></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><div style="font-weight: 600">Motion</div><div class="v">Open: 120ms fade + 0.98→1 scale. Selection moves instantly. No capture toasts.</div></div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1200}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

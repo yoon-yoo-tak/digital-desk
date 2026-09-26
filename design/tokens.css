@@ -1,0 +1,153 @@
+/*
+ * Digital Desk design tokens.
+ * Source of truth for colors, type, spacing, radii and motion.
+ * Mockups: design/mockups/*.dc.html · Spec: docs/DESIGN.md
+ *
+ * Two surfaces share one set of semantic names:
+ *   <html data-surface="panel">   Quick Search (always dark, vibrancy)
+ *   <html data-surface="window">  Main window, Settings, Onboarding (light; dark = provisional)
+ */
+
+:root {
+  /* Type */
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --fs-query: 22px;      /* Quick Search input, regular, letter-spacing -0.01em */
+  --fs-title: 15px;      /* inspector title, pile name — semibold */
+  --fs-row: 14px;        /* row title (panel) — medium */
+  --fs-row-window: 13.5px; /* row title (window) — medium */
+  --fs-body: 13px;       /* buttons, menus, settings rows */
+  --fs-mono: 12.5px;     /* copied code / text as row title */
+  --fs-meta: 12px;       /* row meta, footer, times */
+  --fs-caps: 11px;       /* section labels — semibold, uppercase, +0.06em */
+
+  /* Spacing (4pt grid) */
+  --sp-1: 4px;
+  --sp-1-5: 6px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+
+  /* Radii */
+  --r-panel: 16px;
+  --r-window-card: 12px;
+  --r-preview: 10px;
+  --r-row: 8px;
+  --r-button: 7px;
+  --r-icon-tile: 7px;
+  --r-chip: 13px;
+  --r-match: 3px;
+
+  /* Sizes */
+  --panel-w: 860px;          /* with preview pane */
+  --panel-w-compact: 760px;  /* idle / no preview */
+  --panel-h: 588px;
+  --panel-input-h: 64px;
+  --panel-filter-h: 44px;
+  --panel-footer-h: 36px;
+  --panel-list-w: 392px;
+  --row-h-panel: 48px;
+  --row-h-window: 52px;
+  --icon-tile: 32px;
+  --toolbar-h: 52px;
+  --inspector-w: 360px;
+
+  /* Motion */
+  --dur-open: 120ms;       /* panel: fade + scale 0.98 → 1 */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ── Quick Search panel: always dark ─────────────────────────────── */
+[data-surface="panel"] {
+  color-scheme: dark;
+  /* In Electron the blur comes from BrowserWindow `vibrancy`; this is the tint on top.
+     Mockups use rgba(30,30,33,0.82) + backdrop-filter to simulate it. Tune 0.55–0.82 on device. */
+  --bg: rgba(30, 30, 33, 0.72);
+  --bg-solid: #1e1e21;
+  --border: rgba(255, 255, 255, 0.10);
+  --hairline: rgba(255, 255, 255, 0.07);
+  --fill: rgba(255, 255, 255, 0.07);       /* icon tiles, secondary buttons */
+  --fill-strong: rgba(255, 255, 255, 0.12);/* selected row, active chip */
+  --footer-bg: rgba(0, 0, 0, 0.12);
+
+  --text: #f2f1ee;
+  --text-2: rgba(242, 241, 238, 0.64);
+  --text-3: rgba(242, 241, 238, 0.50);
+  --text-placeholder: rgba(242, 241, 238, 0.42);
+  --icon: rgba(242, 241, 238, 0.78);
+
+  --accent: #f0a94b;
+  --accent-text: #f6c27e;                  /* accent-colored text on dark */
+  --on-accent: #1c1b19;
+  --accent-tint: rgba(240, 169, 75, 0.16); /* date chip, paused strip (0.10) */
+  --accent-border: rgba(240, 169, 75, 0.45);
+  --match: rgba(240, 169, 75, 0.32);       /* search highlight background */
+  --focus-ring: rgba(240, 169, 75, 0.9);
+
+  --shadow: 0 30px 90px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Windows: light (designed) ───────────────────────────────────── */
+[data-surface="window"] {
+  color-scheme: light;
+  --bg: #fbfaf8;
+  --bg-chrome: #f3f2ef;       /* toolbar */
+  --bg-inspector: #f7f6f3;
+  --bg-card: #ffffff;
+  --border: #e4e2dd;
+  --border-control: #dad7d1;
+  --hairline: #eeece8;
+  --fill: #eeece8;            /* icon tiles, segmented track #e6e4df */
+  --segment-track: #e6e4df;
+  --selected: #f2e8da;        /* selected row */
+
+  --text: #1c1b19;
+  --text-2: #5f5c56;
+  --text-3: #7a766f;
+  --icon: #5f5c56;
+
+  --accent: #a85a0a;          /* links, toggles, menu highlight — 4.5:1 on white */
+  --accent-hover: #7e4306;
+  --on-accent: #ffffff;
+  --status-dot: #d98a2b;      /* "Capturing" dot */
+  --match: rgba(240, 169, 75, 0.38);
+  --focus-ring: rgba(168, 90, 10, 0.55);
+
+  --primary-bg: #1c1b19;      /* primary button (Open) */
+  --primary-text: #fbfaf8;
+}
+
+/* ── Windows: dark (PROVISIONAL — not in mockups; derived from panel palette) ── */
+@media (prefers-color-scheme: dark) {
+  [data-surface="window"] {
+    color-scheme: dark;
+    --bg: #1c1c1e;
+    --bg-chrome: #242427;
+    --bg-inspector: #202023;
+    --bg-card: #26262a;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-control: rgba(255, 255, 255, 0.14);
+    --hairline: rgba(255, 255, 255, 0.06);
+    --fill: rgba(255, 255, 255, 0.07);
+    --segment-track: rgba(255, 255, 255, 0.08);
+    --selected: rgba(240, 169, 75, 0.16);
+
+    --text: #f2f1ee;
+    --text-2: #a9a7a2;
+    --text-3: #8c8a85;
+    --icon: #a9a7a2;
+
+    --accent: #f0a94b;
+    --accent-hover: #f6c27e;
+    --on-accent: #1c1b19;
+    --status-dot: #f0a94b;
+    --match: rgba(240, 169, 75, 0.32);
+    --focus-ring: rgba(240, 169, 75, 0.9);
+
+    --primary-bg: #f2f1ee;
+    --primary-text: #1c1b19;
+  }
+}

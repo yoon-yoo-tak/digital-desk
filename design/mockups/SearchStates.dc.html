@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quick Search — states</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Apple SD Gothic Neo",system-ui,sans-serif;background:#23252A;-webkit-font-smoothing:antialiased}
+a{color:#F0A94B}a:hover{color:#F6C27E}
+.t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hl{background:rgba(240,169,75,0.32);border-radius:3px;padding:0 1px}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.kbd{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;box-sizing:border-box;border-radius:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.10);font-size:11px;color:#E4E2DD}
+.cap{font-size:12px;font-weight:600;letter-spacing:0.04em;color:#A9A7A2;margin:0 0 10px 4px}
+.panel{width:760px;display:flex;flex-direction:column;border-radius:16px;background:rgba(30,30,33,0.92);border:1px solid rgba(255,255,255,0.10);box-shadow:0 24px 70px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.06);overflow:hidden;color:#F2F1EE}
+.sec{padding:10px 10px 6px;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:rgba(242,241,238,0.5)}
+.ico{width:32px;height:32px;flex-shrink:0;border-radius:7px;background:rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:rgba(242,241,238,0.78)}
+</style>
+</helmet>
+<div style="width: 900px; height: 1240px; box-sizing: border-box; padding: 56px 70px; display: flex; flex-direction: column; gap: 44px; background: #23252A">
+
+<section aria-label="Idle">
+<div class="cap">1 · IDLE — just opened, nothing typed</div>
+<div class="panel">
+<div style="height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 20px">
+<svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="rgba(242,241,238,0.64)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.75"></circle><path d="M10.5 10.5L14 14"></path></svg>
+<div style="flex-grow: 1; font-size: 22px; color: rgba(242,241,238,0.42); display: flex; align-items: center; gap: 2px"><span style="width: 2px; height: 24px; background: #F0A94B; border-radius: 1px"></span>Search your desk…</div>
+</div>
+<div style="border-top: 1px solid rgba(255,255,255,0.07); padding: 4px 8px 8px">
+<div class="sec">On your desk</div>
+<div style="display: flex; gap: 8px; padding: 2px 10px 6px">
+<button style="display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.06); color: #F2F1EE; font: inherit; font-size: 12.5px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5L8 2.5l5.5 3L8 8.5z"></path><path d="M2.5 8.5L8 11.5l5.5-3"></path></svg>Redis Connection Error</button>
+<button style="display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.06); color: #F2F1EE; font: inherit; font-size: 12.5px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 5.5L8 2.5l5.5 3L8 8.5z"></path><path d="M2.5 8.5L8 11.5l5.5-3"></path></svg>ALEN CUP</button>
+<button style="display: flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.06); color: #F2F1EE; font: inherit; font-size: 12.5px"><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 2.5h5l3 3v8H4z"></path></svg>ALEN_CUP.pdf</button>
+</div>
+<div class="sec">Recent</div>
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px; border-radius: 8px; background: rgba(255,255,255,0.12)">
+<div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 6px; background: #15171A; border: 1px solid rgba(255,255,255,0.14); padding: 6px 5px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px"><div style="height: 2px; width: 70%; background: #6B7280"></div><div style="height: 2px; width: 92%; background: #E5484D"></div><div style="height: 2px; width: 60%; background: #6B7280"></div></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t" style="font-size: 14px; font-weight: 500">RedisConnectionFailureException</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">Screenshot · IntelliJ IDEA</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">14:32</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px">
+<div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="2.5" width="9" height="11.5" rx="1.5"></rect><path d="M6 6h4M6 8.5h4M6 11h2.5"></path></svg></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t mono" style="font-size: 12.5px">SELECT * FROM employee WHERE dept_id = 3;</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">Copied · IntelliJ IDEA</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">14:21</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px">
+<div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 9.5l3-3"></path><path d="M7.5 4.5l1-1a2.5 2.5 0 0 1 3.5 3.5l-1 1"></path><path d="M8.5 11.5l-1 1a2.5 2.5 0 0 1-3.5-3.5l1-1"></path></svg></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t" style="font-size: 14px; font-weight: 500">Redis eviction policies</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">redis.io · Chrome</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">13:52</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px">
+<div class="ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path></svg></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t" style="font-size: 14px; font-weight: 500">ALEN_CUP.pdf</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">PDF · Downloads</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">11:32</div>
+</div>
+</div>
+<div style="height: 36px; display: flex; align-items: center; gap: 16px; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.12); font-size: 12px; color: rgba(242,241,238,0.64)">
+<div style="display: flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 4px; background: #F0A94B"></span>Capturing</div>
+<div style="flex-grow: 1"></div>
+<div>Try <span class="mono" style="color: #F2F1EE">yesterday</span>, <span class="mono" style="color: #F2F1EE">type:link</span>, <span class="mono" style="color: #F2F1EE">app:Figma</span></div>
+</div>
+</div>
+</section>
+
+<section aria-label="Structured filters">
+<div class="cap">2 · FILTER SYNTAX — typed prefixes turn into chips</div>
+<div class="panel">
+<div style="height: 64px; display: flex; align-items: center; gap: 10px; padding: 0 20px">
+<svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="rgba(242,241,238,0.64)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.75"></circle><path d="M10.5 10.5L14 14"></path></svg>
+<span style="display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 10px; border-radius: 7px; background: rgba(255,255,255,0.12); font-size: 13px"><span style="color: rgba(242,241,238,0.64)">type</span>Screenshot</span>
+<span style="display: flex; align-items: center; gap: 5px; height: 28px; padding: 0 10px; border-radius: 7px; background: rgba(255,255,255,0.12); font-size: 13px"><span style="color: rgba(242,241,238,0.64)">app</span>IntelliJ IDEA</span>
+<div style="flex-grow: 1; font-size: 22px; display: flex; align-items: center; gap: 2px">redis<span style="width: 2px; height: 24px; background: #F0A94B; border-radius: 1px"></span></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">2 results</div>
+</div>
+<div style="border-top: 1px solid rgba(255,255,255,0.07); padding: 6px 8px 8px">
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px; border-radius: 8px; background: rgba(255,255,255,0.12)">
+<div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 6px; background: #15171A; border: 1px solid rgba(255,255,255,0.14); padding: 6px 5px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px"><div style="height: 2px; width: 70%; background: #6B7280"></div><div style="height: 2px; width: 92%; background: #E5484D"></div><div style="height: 2px; width: 60%; background: #6B7280"></div></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t" style="font-size: 14px; font-weight: 500"><span class="hl">Redis</span>ConnectionFailureException</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">Screenshot · IntelliJ IDEA</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">Today 14:32</div>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 10px">
+<div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 6px; background: #15171A; border: 1px solid rgba(255,255,255,0.14); padding: 6px 5px; box-sizing: border-box; display: flex; flex-direction: column; gap: 3px"><div style="height: 2px; width: 80%; background: #6B7280"></div><div style="height: 2px; width: 50%; background: #6B7280"></div><div style="height: 2px; width: 70%; background: #6B7280"></div></div>
+<div style="flex-grow: 1; min-width: 0"><div class="t" style="font-size: 14px; font-weight: 500">application.yml — spring.data.<span class="hl">redis</span>.host</div><div class="t" style="font-size: 12px; color: rgba(242,241,238,0.64)">Screenshot · IntelliJ IDEA</div></div>
+<div style="font-size: 12px; color: rgba(242,241,238,0.5)">Thu 14:10</div>
+</div>
+</div>
+<div style="height: 36px; display: flex; align-items: center; gap: 6px; padding: 0 16px; border-top: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.12); font-size: 12px; color: rgba(242,241,238,0.64)"><span class="kbd">⌫</span>on an empty field removes the last chip</div>
+</div>
+</section>
+
+<section aria-label="No results">
+<div class="cap">3 · NO RESULTS — offer the one widening step, never a dead end</div>
+<div class="panel">
+<div style="height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 20px">
+<svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="rgba(242,241,238,0.64)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.75"></circle><path d="M10.5 10.5L14 14"></path></svg>
+<div lang="ko" style="flex-grow: 1; font-size: 22px; display: flex; align-items: center; gap: 6px"><span style="color: #F0A94B; border-bottom: 1.5px dotted rgba(240,169,75,0.7)">어제</span>kubernetes ingress</div>
+</div>
+<div style="border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 20px 28px; display: flex; flex-direction: column; align-items: center; gap: 14px">
+<div style="font-size: 14px; color: rgba(242,241,238,0.86)">Nothing from yesterday matches “kubernetes ingress”.</div>
+<div style="display: flex; gap: 8px">
+<button style="display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 7px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.10); color: #F2F1EE; font: inherit; font-size: 13px">Search all time <span class="kbd">⌘↵</span></button>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Capture paused">
+<div class="cap">4 · CAPTURE PAUSED — search still works, the strip says why nothing new appears</div>
+<div class="panel">
+<div style="height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 20px">
+<svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="rgba(242,241,238,0.64)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="7" cy="7" r="4.75"></circle><path d="M10.5 10.5L14 14"></path></svg>
+<div style="flex-grow: 1; font-size: 22px; color: rgba(242,241,238,0.42)">Search your desk…</div>
+</div>
+<div style="height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 16px 0 20px; border-top: 1px solid rgba(255,255,255,0.07); background: rgba(240,169,75,0.10); font-size: 13px">
+<svg width="14" height="14" viewBox="0 0 16 16" fill="#F0A94B" aria-hidden="true"><rect x="4" y="3" width="2.5" height="10" rx="1"></rect><rect x="9.5" y="3" width="2.5" height="10" rx="1"></rect></svg>
+<div style="flex-grow: 1; color: #F6C27E">Capture paused · resumes at 14:52</div>
+<button style="height: 26px; padding: 0 12px; border-radius: 6px; border: none; background: #F0A94B; color: #1C1B19; font: inherit; font-size: 12px; font-weight: 600">Resume now</button>
+</div>
+</div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":900,"height":1240}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings — Capture</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;background:#F3F2EF;-webkit-font-smoothing:antialiased;color:#1C1B19}
+a{color:#A85A0A}a:hover{color:#7E4306}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace}
+.grp{border-radius:10px;border:1px solid #E4E2DD;background:#FFFFFF;display:flex;flex-direction:column}
+.gh{font-size:13px;font-weight:600;padding:0 4px 8px}
+.gr{display:flex;align-items:center;gap:12px;min-height:44px;padding:8px 14px;box-sizing:border-box;border-top:1px solid #EEECE8;font-size:13px}
+.gr:first-child{border-top:none}
+.sub{font-size:12px;color:#5F5C56}
+.sw{width:34px;height:20px;border-radius:10px;border:none;padding:2px;box-sizing:border-box;display:flex;flex-shrink:0}
+.knob{width:16px;height:16px;border-radius:8px;background:#FFFFFF;box-shadow:0 1px 2px rgba(0,0,0,0.25)}
+.btn{height:26px;padding:0 10px;border-radius:6px;border:1px solid #DAD7D1;background:#FFFFFF;color:#1C1B19;font:inherit;font-size:12.5px}
+</style>
+</helmet>
+<div style="width: 760px; height: 800px; display: flex; flex-direction: column; background: #F3F2EF; overflow: hidden">
+
+<div style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding: 12px 20px 10px; border-bottom: 1px solid #E4E2DD; background: #ECEAE6; position: relative">
+<div aria-hidden="true" style="position: absolute; left: 20px; top: 14px; display: flex; gap: 8px"><span style="width: 12px; height: 12px; border-radius: 6px; background: #FF5F57"></span><span style="width: 12px; height: 12px; border-radius: 6px; background: #FEBC2E"></span><span style="width: 12px; height: 12px; border-radius: 6px; background: #28C840"></span></div>
+<div style="font-size: 13px; font-weight: 600; margin-bottom: 10px">Capture</div>
+<div role="tablist" aria-label="Settings" style="display: flex; gap: 4px">
+<button role="tab" aria-selected="false" style="width: 76px; height: 48px; border-radius: 7px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 11.5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="2"></circle><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"></path></svg>General</button>
+<button role="tab" aria-selected="true" style="width: 76px; height: 48px; border-radius: 7px; border: none; background: #DEDBD5; color: #1C1B19; font: inherit; font-size: 11.5px; font-weight: 600; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9.5h3l1 1.75h3l1-1.75h3"></path><path d="M2.5 9.5L4.25 4h7.5l1.75 5.5v3.5h-11z"></path></svg>Capture</button>
+<button role="tab" aria-selected="false" style="width: 76px; height: 48px; border-radius: 7px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 11.5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="7" width="9" height="6.5" rx="1.5"></rect><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2"></path></svg>Privacy</button>
+<button role="tab" aria-selected="false" style="width: 76px; height: 48px; border-radius: 7px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 11.5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><ellipse cx="8" cy="4" rx="5" ry="1.8"></ellipse><path d="M3 4v8c0 1 2.2 1.8 5 1.8s5-.8 5-1.8V4M3 8c0 1 2.2 1.8 5 1.8S13 9 13 8"></path></svg>Storage</button>
+<button role="tab" aria-selected="false" style="width: 76px; height: 48px; border-radius: 7px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 11.5px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" aria-hidden="true"><rect x="1.5" y="4" width="13" height="8" rx="1.5"></rect><path d="M4 6.5h1M7.5 6.5h1M11 6.5h1M5 9.5h6"></path></svg>Shortcuts</button>
+</div>
+</div>
+
+<div style="flex-grow: 1; padding: 24px 40px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+
+<div>
+<div class="gh">Sources</div>
+<div class="grp">
+<div class="gr"><div style="flex-grow: 1"><div>Clipboard</div><div class="sub">Text, links, images and copied files</div></div><button class="sw" aria-pressed="true" aria-label="Clipboard" style="background: #A85A0A; justify-content: flex-end"><span class="knob"></span></button></div>
+<div class="gr"><div style="flex-grow: 1"><div>Screenshots</div><div class="sub mono" style="font-size: 11.5px">~/Desktop</div></div><button class="btn">Change…</button><button class="sw" aria-pressed="true" aria-label="Screenshots" style="background: #A85A0A; justify-content: flex-end"><span class="knob"></span></button></div>
+<div class="gr"><div style="flex-grow: 1"><div>Downloads</div><div class="sub mono" style="font-size: 11.5px">~/Downloads</div></div><button class="btn">Change…</button><button class="sw" aria-pressed="true" aria-label="Downloads" style="background: #A85A0A; justify-content: flex-end"><span class="knob"></span></button></div>
+<div class="gr"><div style="flex-grow: 1"><div>Read text in screenshots</div><div class="sub">On-device OCR, English and Korean</div></div><button class="sw" aria-pressed="true" aria-label="Read text in screenshots" style="background: #A85A0A; justify-content: flex-end"><span class="knob"></span></button></div>
+</div>
+</div>
+
+<div>
+<div class="gh">Never capture from</div>
+<div class="grp">
+<div class="gr"><div style="width: 22px; height: 22px; border-radius: 5px; background: #1A6FE0"></div><div style="flex-grow: 1">1Password</div></div>
+<div class="gr"><div style="width: 22px; height: 22px; border-radius: 5px; background: #8A8680"></div><div style="flex-grow: 1">Keychain Access</div></div>
+<div class="gr"><div style="width: 22px; height: 22px; border-radius: 5px; background: #2E7D4F"></div><div style="flex-grow: 1">[Your banking app]</div></div>
+<div class="gr" style="min-height: 36px; padding: 4px 8px; background: #FAF9F7; border-radius: 0 0 10px 10px">
+<button aria-label="Add app" style="width: 26px; height: 24px; border: none; background: transparent; font: inherit; font-size: 16px; color: #1C1B19">+</button>
+<button aria-label="Remove app" style="width: 26px; height: 24px; border: none; background: transparent; font: inherit; font-size: 16px; color: #1C1B19">−</button>
+<div class="sub" style="margin-left: auto">Copies made in these apps are ignored, even while capturing.</div>
+</div>
+</div>
+</div>
+
+<div>
+<div class="gh">Keep unpinned items</div>
+<div class="grp">
+<div class="gr" style="min-height: 56px">
+<div role="radiogroup" aria-label="Keep unpinned items" style="display: flex; padding: 2px; border-radius: 8px; background: #EEECE8">
+<button role="radio" aria-checked="false" style="height: 26px; padding: 0 14px; border-radius: 6px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 12.5px">7 days</button>
+<button role="radio" aria-checked="true" style="height: 26px; padding: 0 14px; border-radius: 6px; border: none; background: #FFFFFF; box-shadow: 0 1px 2px rgba(0,0,0,0.10); color: #1C1B19; font: inherit; font-size: 12.5px; font-weight: 600">30 days</button>
+<button role="radio" aria-checked="false" style="height: 26px; padding: 0 14px; border-radius: 6px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 12.5px">90 days</button>
+<button role="radio" aria-checked="false" style="height: 26px; padding: 0 14px; border-radius: 6px; border: none; background: transparent; color: #5F5C56; font: inherit; font-size: 12.5px">Forever</button>
+</div>
+</div>
+<div class="gr"><div class="sub">Clipboard text expires after this. Screenshots and downloads keep their record; the files themselves are never touched. Pinned and archived items stay until you remove them.</div></div>
+</div>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":760,"height":800}}'>
+class Component extends DCLogic {
+renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

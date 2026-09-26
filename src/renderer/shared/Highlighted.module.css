@@ -1,0 +1,6 @@
+.match {
+  background: var(--match);
+  color: inherit;
+  border-radius: var(--r-match);
+  padding: 0 1px;
+}
