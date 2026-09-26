@@ -91,3 +91,7 @@ git push --follow-tags
 ### 경고 없이 설치되게 하려면 (선택)
 
 Apple Developer Program(연 $99)의 **Developer ID Application** 인증서로 서명하고 공증하면 3–4단계 없이 바로 열립니다. `electron-builder.yml`의 `identity: '-'`를 지우고 `hardenedRuntime: true`, `notarize: true`로 바꾼 뒤, 저장소 Secrets에 `CSC_LINK`(인증서 .p12, base64), `CSC_KEY_PASSWORD`, `APPLE_ID`, `APPLE_APP_SPECIFIC_PASSWORD`, `APPLE_TEAM_ID`를 넣으면 릴리스 워크플로가 그대로 사용합니다.
+
+## 라이선스
+
+[MIT](LICENSE)
