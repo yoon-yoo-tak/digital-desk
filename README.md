@@ -13,7 +13,9 @@
   <a href="https://github.com/yoon-yoo-tak/digital-desk/releases/latest"><b>⬇ 최신 버전 다운로드 (.dmg)</b></a>
 </p>
 
-![Quick Search: "지난주 redis 에러"](docs/images/quick-search.png)
+![Digital Desk 데모: 자동으로 쌓인 Inbox → ⌘⇧Space로 "지난주 redis 에러" 검색 → 스크린샷 속 글자 검색](docs/images/demo.gif)
+
+<p align="center"><sub>데모 프로필(샘플 데이터)로 녹화한 화면입니다 · <a href="docs/media/digital-desk-demo.mp4">고화질 영상(MP4, 38초)</a></sub></p>
 
 ## 무엇을 하나요
 
