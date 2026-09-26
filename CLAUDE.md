@@ -55,6 +55,7 @@
 - 패키지 앱 검증: `npm run build:mac:dir` 후 `DESK_USER_DATA=<dir> "release/mac-arm64/Digital Desk.app/Contents/MacOS/Digital Desk" --remote-debugging-port=9222`로 셸에서 실행하면 CDP를 쓸 수 있다(TCC 권한은 터미널에 귀속된다). 종료는 `osascript -e 'quit app "Digital Desk"'`로 한다.
 - main 프로세스에서 잡히지 않은 예외는 Electron 오류 **대화상자**가 되어 종료까지 막는다. 종료 중에는 창이 파괴되므로 `isDestroyed()`를 확인한다.
 - OCR은 새로 빌드한 헬퍼의 첫 인식에 약 25초가 걸린다(예열로 가림). `npm run build:helper`로 다시 빌드한 직후 OCR이 느린 것은 정상이다.
+- 의존성을 바꾼 뒤에는 `npx -y npm@latest install --package-lock-only`로 lock을 다시 만든다. 로컬 npm(11.6)은 optional 의존성 일부를 lock에서 빼먹고, CI 러너의 더 새로운 npm은 그런 lock으로 `npm ci`를 거부한다.
 
 ## 스택 (결정됨 — 바꾸려면 ARCHITECTURE.md와 같이 고칠 것)
 
