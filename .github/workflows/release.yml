@@ -35,7 +35,13 @@ jobs:
       - run: npm test
 
       - name: Build universal dmg
-        run: npm run build:mac
+        # Unset secrets arrive as empty strings, and an empty CSC_LINK makes electron-builder fail,
+        # so drop the empty ones. Publishing is done by the next step, not electron-builder.
+        run: |
+          for name in CSC_LINK CSC_KEY_PASSWORD APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID; do
+            [ -n "${!name}" ] || unset "$name"
+          done
+          npm run build:mac -- --publish never
         env:
           # Only used when you switch to Developer ID signing (README › 경고 없이 설치되게 하려면).
           CSC_LINK: ${{ secrets.CSC_LINK }}
