@@ -70,6 +70,8 @@ export class CaptureState extends EventEmitter<{ change: [] }> {
     const settings = this.settings.get()
     if (!settings.onboarded) return false // DESIGN §10: nothing before onboarding is finished
     if (!settings.sources[source]) return false
+    // Without a bundle id we cannot enforce app exclusions; never read an unknown clipboard.
+    if (source === 'clipboard' && !app?.bundleId) return false
     if (app?.bundleId && settings.excludedApps.some((e) => e.bundleId === app.bundleId)) return false
     return true
   }

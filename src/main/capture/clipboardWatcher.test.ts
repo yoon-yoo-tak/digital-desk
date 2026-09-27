@@ -81,6 +81,21 @@ beforeEach(() => {
 })
 
 describe('ClipboardWatcher', () => {
+  it.each(['unknown app', 'onboarding', 'disabled clipboard', 'transient'])(
+    'does not read or store content for %s', async (scenario) => {
+      reader.text = 'sensitive content'
+      if (scenario === 'onboarding') settings.onboarded = false
+      if (scenario === 'disabled clipboard') settings.sources.clipboard = false
+      const outcome = await watcher.handle(event({
+        ...(scenario === 'unknown app' ? { app: { name: null, bundleId: null } } : {}),
+        transient: scenario === 'transient'
+      }))
+      expect(outcome.kind).toBe('skipped')
+      expect(reader.reads).toBe(0)
+      expect(repo.count()).toBe(0)
+      expect(fetchTitle).not.toHaveBeenCalled()
+    }
+  )
   it('stores copied text with its source app and a mono hint', async () => {
     reader.text = 'SELECT * FROM employee WHERE dept_id = 3;'
     const outcome = await watcher.handle(event())

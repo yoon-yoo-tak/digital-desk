@@ -3,6 +3,7 @@ import { migrate, type Db } from './db'
 import Database from 'better-sqlite3'
 import { ItemsRepo } from './itemsRepo'
 import { DEFAULT_SETTINGS, SettingsRepo } from './settingsRepo'
+import { MIGRATIONS } from './migrations'
 
 let db: Db
 let repo: ItemsRepo
@@ -23,7 +24,21 @@ const fts = (q: string): string[] =>
 describe('migrate', () => {
   it('is idempotent', () => {
     migrate(db)
-    expect(db.pragma('user_version', { simple: true })).toBe(1)
+    expect(db.pragma('user_version', { simple: true })).toBe(MIGRATIONS.length)
+  })
+
+  it('repairs stale FTS in existing v1 databases without changing items', () => {
+    const item = repo.insert({ type: 'text', text: 'payload', sourceApp: 'Chrome', capturedAt: 1000 })
+    db.prepare('UPDATE items SET source_app = ? WHERE id = ?').run('Safari', item.id)
+    db.pragma('user_version = 1')
+    const before = repo.get(item.id)
+    expect(fts('Safari')).toEqual([])
+    migrate(db)
+    expect(fts('Safari')).toEqual([item.id])
+    expect(fts('Chrome')).toEqual([])
+    expect(repo.get(item.id)).toEqual(before)
+    migrate(db)
+    expect(fts('Safari')).toEqual([item.id])
   })
 })
 
@@ -66,6 +81,23 @@ describe('ItemsRepo', () => {
     const third = repo.list('inbox', second.nextCursor, 2)
     expect(third.items.map((i) => i.id)).toEqual([ids[0]])
     expect(third.nextCursor).toBeNull()
+  })
+
+  it('keeps FTS in sync when a duplicate comes from a different app', () => {
+    const item = repo.insert({ type: 'text', text: 'payload', sourceApp: 'Chrome', capturedAt: 1000 })
+    repo.touch(item.id, 2000, { app: 'Safari', bundleId: 'com.apple.Safari' })
+    expect(fts('Safari')).toEqual([item.id])
+    expect(fts('Chrome')).toEqual([])
+    repo.touch(item.id, 3000, { app: null, bundleId: null })
+    expect(fts('Safari')).toEqual([item.id])
+    expect(repo.touch('missing', 4000, { app: 'Safari', bundleId: null })).toBeNull()
+  })
+
+  it('rolls back the duplicate update if FTS synchronization fails', () => {
+    const item = repo.insert({ type: 'text', text: 'payload', sourceApp: 'Chrome', capturedAt: 1000 })
+    db.exec('DROP TABLE items_fts')
+    expect(() => repo.touch(item.id, 2000, { app: 'Safari', bundleId: null })).toThrow()
+    expect(repo.get(item.id)).toEqual(item)
   })
 
   it('filters views', () => {

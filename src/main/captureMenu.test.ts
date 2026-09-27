@@ -6,6 +6,15 @@ const labels = (entries: MenuEntry[]): string[] =>
   entries.map((e) => (e.kind === 'separator' ? '—' : e.label))
 
 describe('captureMenuModel', () => {
+  it('reports unavailable clipboard capture instead of claiming it is active', () => {
+    const [header] = captureMenuModel({
+      paused: false, pausedUntil: null, sources, helper: 'unavailable', includeAppItems: true
+    })
+    expect(header).toMatchObject({ label: 'Clipboard unavailable' })
+    if (header?.kind !== 'header') throw new Error('Missing header')
+    expect(header.sublabel).toContain('Screenshots · Downloads still active')
+    expect(header.sublabel).toContain('Clipboard capture is stopped')
+  })
   it('offers pause options while capturing', () => {
     const entries = captureMenuModel({ paused: false, pausedUntil: null, sources, includeAppItems: true })
     expect(entries[0]).toEqual({ kind: 'header', label: 'Capturing', sublabel: 'Clipboard · Screenshots · Downloads' })

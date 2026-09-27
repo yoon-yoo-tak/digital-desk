@@ -33,6 +33,11 @@ afterEach(() => {
 })
 
 describe('shouldCapture', () => {
+  it('never captures a clipboard with an unknown source, even with no exclusions configured', () => {
+    settings.set({ excludedApps: [] })
+    expect(state.shouldCapture('clipboard')).toBe(false)
+    expect(state.shouldCapture('clipboard', { name: 'Unknown', bundleId: null })).toBe(false)
+  })
   it('captures from ordinary apps', () => {
     expect(state.shouldCapture('clipboard', intellij)).toBe(true)
   })

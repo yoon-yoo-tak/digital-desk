@@ -1,4 +1,5 @@
 import { displayTitle } from '@shared/format/item'
+import { captureLabel, CAPTURE_STRINGS } from '@shared/format/capture'
 import { formatClock } from '@shared/format/time'
 import type { CaptureStatus, DeskItem, QuickIdle } from '@shared/types'
 import { Icon } from '../shared/Icon'
@@ -43,8 +44,8 @@ export function Footer({ status, hints, note }: FooterProps): React.JSX.Element 
           <Icon name="pause" size={9} /> Paused
         </div>
       ) : (
-        <div className={styles.footerStatus}>
-          <span className={styles.statusDot} /> Capturing
+        <div className={styles.footerStatus} title={status?.helper === 'unavailable' ? CAPTURE_STRINGS.unavailableDetail : undefined}>
+          <span className={styles.statusDot} /> {captureLabel(status)}
         </div>
       )}
       <div className={styles.spacer} />

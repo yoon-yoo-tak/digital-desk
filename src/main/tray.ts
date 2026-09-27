@@ -1,5 +1,6 @@
 import { Menu, Tray, nativeImage } from 'electron'
 import type { CaptureStatus } from '@shared/types'
+import { captureLabel } from '@shared/format/capture'
 import { captureMenuModel, toTemplate, type CaptureCommand } from './captureMenu'
 import { trayIcon } from './paths'
 
@@ -16,7 +17,7 @@ export class DeskTray {
     } else {
       this.tray.setImage(icon)
     }
-    this.tray.setToolTip(status.paused ? 'Digital Desk — paused' : 'Digital Desk — capturing')
+    this.tray.setToolTip(`Digital Desk — ${captureLabel(status)}`)
     const entries = captureMenuModel({ ...status, includeAppItems: true })
     this.tray.setContextMenu(Menu.buildFromTemplate(toTemplate(entries, this.run)))
   }

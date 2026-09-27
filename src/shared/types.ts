@@ -122,8 +122,8 @@ export interface CaptureStatus {
   paused: boolean
   pausedUntil: PausedUntil
   sources: SourceToggles
-  /** 'fallback' = native helper unavailable; app names unknown. */
-  helper: 'running' | 'fallback' | 'starting'
+  /** Clipboard capture stops while the native helper is unavailable. */
+  helper: 'running' | 'unavailable' | 'starting'
   /** false until onboarding is finished: nothing is captured yet. */
   onboarded: boolean
 }

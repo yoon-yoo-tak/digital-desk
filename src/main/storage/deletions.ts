@@ -49,7 +49,8 @@ export class Deletions {
 
   /** minutes = Infinity means everything. */
   countRecent(minutes: number): number {
-    return this.deps.repo.capturedSince(this.since(minutes)).length
+    const since = this.since(minutes)
+    return this.deps.repo.capturedSince(since).length + this.pendingSince(since).length
   }
 
   private since(minutes: number): number {
@@ -58,7 +59,16 @@ export class Deletions {
 
   /** "Delete last 5 minutes…" — no undo; the menu asks for confirmation first. */
   deleteRecent(minutes: number): number {
-    return this.removeAll(this.deps.repo.capturedSince(this.since(minutes)))
+    const since = this.since(minutes)
+    // A privacy deletion must also invalidate Undo and remove its retained assets immediately.
+    const pending = this.pendingSince(since)
+    for (const token of pending) this.finalize(token)
+    return this.removeAll(this.deps.repo.capturedSince(since)) + pending.length
+  }
+
+  private pendingSince(since: number): string[] {
+    return [...this.pending].filter(([, { item }]) => item.capturedAt >= since || item.lastUsedAt >= since)
+      .map(([token]) => token)
   }
 
   /** Retention: temporary items not used for `days` days. null = keep forever. */

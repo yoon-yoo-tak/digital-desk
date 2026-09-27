@@ -53,6 +53,31 @@ describe('delete with undo', () => {
 })
 
 describe('delete recent', () => {
+  it.each([5, Infinity])('invalidates pending Undo during a privacy deletion (%s minutes)', (minutes) => {
+    const item = repo.insert({ type: 'image', capturedAt: now - DAY })
+    repo.touch(item.id, now)
+    const { undoToken } = deletions.delete(item.id)!
+    expect(deletions.countRecent(minutes)).toBe(1)
+    expect(deletions.deleteRecent(minutes)).toBe(1)
+    expect(deletions.undo(undoToken)).toBe(false)
+    expect(removed).toEqual([item.id])
+    vi.advanceTimersByTime(UNDO_MS)
+    expect(removed).toEqual([item.id])
+  })
+  it('removes recaptured items and their assets/index, including the exact time boundary', () => {
+    const old = repo.insert({ type: 'text', text: 'keep', capturedAt: now - DAY })
+    const duplicate = repo.insert({ type: 'image', title: 'sensitive', capturedAt: now - DAY })
+    repo.setPinned(duplicate.id, true)
+    repo.setArchived(duplicate.id, true)
+    repo.touch(duplicate.id, now - 5 * 60_000)
+    expect(deletions.countRecent(5)).toBe(1)
+    expect(deletions.deleteRecent(5)).toBe(1)
+    expect(repo.get(duplicate.id)).toBeNull()
+    expect(repo.get(old.id)).not.toBeNull()
+    expect(removed).toEqual([duplicate.id])
+    const db = (repo as unknown as { db: Database.Database }).db
+    expect(db.prepare("SELECT rowid FROM items_fts WHERE items_fts MATCH 'sensitive'").all()).toHaveLength(0)
+  })
   it('deletes what was captured in the last N minutes', () => {
     repo.insert({ type: 'text', text: 'old', capturedAt: now - 10 * 60_000 })
     repo.insert({ type: 'text', text: 'new', capturedAt: now - 2 * 60_000 })

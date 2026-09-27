@@ -1,13 +1,13 @@
 // App bootstrap: storage → capture → UI surfaces.
 
 import { join } from 'node:path'
-import { BrowserWindow, Menu, app, dialog, net, shell } from 'electron'
+import { BrowserWindow, Menu, app, dialog, shell } from 'electron'
 import { IPC } from '@shared/ipc'
 import type { CaptureStatus, Settings, SettingsTab, ShortcutStatus } from '@shared/types'
 import { ItemActions } from './actions/itemActions'
 import { CaptureState } from './capture/captureState'
 import { ClipboardWatcher } from './capture/clipboardWatcher'
-import { ElectronClipboardReader, FallbackPasteboardPoller } from './capture/electronClipboard'
+import { ElectronClipboardReader } from './capture/electronClipboard'
 import { FileCapture } from './capture/fileCapture'
 import { DEFAULT_SCREENSHOT_FOLDER, FolderWatcher, electronProbe, helperOcrEngine } from './capture/folderWatchers'
 import { OcrQueue } from './indexing/ocrQueue'
@@ -107,7 +107,7 @@ async function start(): Promise<void> {
     now,
     onChanged: onItemsChanged,
     fetchTitle: (url) =>
-      settings.get().fetchLinkTitles ? fetchLinkTitle(url, (u, init) => net.fetch(u, init)) : Promise.resolve(null)
+      settings.get().fetchLinkTitles ? fetchLinkTitle(url) : Promise.resolve(null)
   })
   const actions = new ItemActions({ repo, assets, watcher, helper, onChanged: onItemsChanged })
   const search = new SearchService(db)
@@ -218,15 +218,15 @@ async function start(): Promise<void> {
   state.on('change', publishStatus)
   state.start()
 
-  // Capture: the native helper when possible, a degraded poller otherwise.
+  // Capture only while the helper can identify the source and privacy markers.
   // Logs what happened and from which app — never the content.
   const capture = (event: PasteboardEvent): void => {
+    if (!helper.running) return
     void watcher.handle(event).then((outcome) => {
       const detail = outcome.kind === 'skipped' ? outcome.reason : outcome.items.map((i) => i.type).join(',')
       console.log(`[capture] clipboard ${outcome.kind} (${detail}) from ${event.app.name ?? 'unknown app'}`)
-    })
+    }).catch((error: unknown) => console.warn('[clipboard] capture failed', error))
   }
-  const fallback = new FallbackPasteboardPoller(state, now, capture)
   helper.on('pasteboard', capture)
   // Screenshots and Downloads (ARCHITECTURE §6.2–6.3). The screenshot folder comes from the helper.
   const ocrQueue = new OcrQueue({
@@ -257,7 +257,6 @@ async function start(): Promise<void> {
 
   helper.on('ready', () => {
     helperMode = 'running'
-    fallback.stop()
     publishStatus()
     void startFolderWatchers()
     // OCR that was still queued when the app last quit.
@@ -265,10 +264,10 @@ async function start(): Promise<void> {
   })
   helper.on('unavailable', (reason) => {
     console.warn('[desk-helper] unavailable:', reason)
-    helperMode = 'fallback'
-    fallback.start()
+    helperMode = 'unavailable'
     publishStatus()
-    void startFolderWatchers()
+    // Keep the previously discovered screenshot folder during a temporary helper restart.
+    if (!screenshotWatcher.folder || !downloadWatcher.folder) void startFolderWatchers()
   })
   helper.start()
 
@@ -405,7 +404,6 @@ async function start(): Promise<void> {
     void screenshotWatcher.close()
     void downloadWatcher.close()
     state.stop()
-    fallback.stop()
     helper.stop()
     tray.destroy()
     db.close()

@@ -40,5 +40,11 @@ export const MIGRATIONS: readonly string[] = [
     key        TEXT PRIMARY KEY,
     value_json TEXT NOT NULL
   );
+  `,
+  // 002 — repair source-app index entries left stale by duplicate captures in v0.1.0.
+  `
+  DELETE FROM items_fts;
+  INSERT INTO items_fts (rowid, title, text, ocr_text, file_name, url, domain, source_app)
+    SELECT rowid, title, text, ocr_text, file_name, url, domain, source_app FROM items;
   `
 ]

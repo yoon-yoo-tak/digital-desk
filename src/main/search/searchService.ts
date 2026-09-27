@@ -9,8 +9,6 @@ import { blockExcerpt, lineExcerpt, scoreItem, type ScorableItem } from './ranki
 import { groupHits } from './sessions'
 
 export const MAX_RESULTS = 50
-/** Candidates considered for a filter-only query (no words), newest first. */
-const FILTER_ONLY_LIMIT = 500
 
 const SEARCHABLE_COLUMNS = ['title', 'text', 'ocr_text', 'file_name', 'url', 'domain', 'source_app'] as const
 
@@ -98,7 +96,10 @@ export class SearchService {
     } else if (where.length > 0 || filters.type) {
       const filterSql = where.length > 0 ? `WHERE ${where.join(' AND ')}` : ''
       rows = this.db
-        .prepare(`SELECT ${LIGHT_COLUMNS} FROM items ${filterSql} ORDER BY last_used_at DESC LIMIT ${FILTER_ONLY_LIMIT}`)
+        // Every matching item contributes to counts and ranking. No text/OCR is needed without words.
+        .prepare(`SELECT rowid, type, source_app AS sourceApp, last_used_at AS lastUsedAt, pinned, archived,
+          NULL AS title, NULL AS text, NULL AS ocrText, NULL AS fileName, NULL AS url, NULL AS domain
+          FROM items ${filterSql}`)
         .all(params) as LightRow[]
     }
 
@@ -114,7 +115,7 @@ export class SearchService {
       scored.push({ rowid: row.rowid, type: row.type, score: result.score, lastUsedAt: row.lastUsedAt, words: result.words })
     }
     if (filters.type) scored = scored.filter((s) => s.type === filters.type)
-    scored.sort((a, b) => b.score - a.score || b.lastUsedAt - a.lastUsedAt)
+    scored.sort((a, b) => b.score - a.score || b.lastUsedAt - a.lastUsedAt || b.rowid - a.rowid)
     const shown = scored.slice(0, MAX_RESULTS)
 
     // Load only what is shown.

@@ -3,7 +3,8 @@
 
 import type { MenuItemConstructorOptions } from 'electron'
 import { formatClock } from '@shared/format/time'
-import type { PausedUntil, SourceToggles } from '@shared/types'
+import type { CaptureStatus, PausedUntil, SourceToggles } from '@shared/types'
+import { CAPTURE_STRINGS } from '@shared/format/capture'
 
 /** Sources that exist in this build. */
 export const IMPLEMENTED_SOURCES: (keyof SourceToggles)[] = ['clipboard', 'screenshots', 'downloads']
@@ -37,6 +38,7 @@ export interface CaptureMenuInput {
   includeAppItems: boolean
   /** Before onboarding nothing is captured; the menu says so. */
   onboarded?: boolean
+  helper?: CaptureStatus['helper']
 }
 
 const appItems: MenuEntry[] = [
@@ -72,11 +74,16 @@ export function captureMenuModel(input: CaptureMenuInput): MenuEntry[] {
     }
     if (input.includeAppItems) entries.push({ kind: 'separator' }, ...appItems)
   } else {
-    const active = IMPLEMENTED_SOURCES.filter((s) => input.sources[s]).map((s) => SOURCE_LABELS[s])
+    const clipboardUnavailable = input.sources.clipboard && input.helper !== undefined && input.helper !== 'running'
+    const active = IMPLEMENTED_SOURCES
+      .filter((s) => input.sources[s] && !(s === 'clipboard' && clipboardUnavailable))
+      .map((s) => SOURCE_LABELS[s])
     entries.push({
       kind: 'header',
-      label: 'Capturing',
-      sublabel: active.length > 0 ? active.join(' · ') : 'All sources are off'
+      label: clipboardUnavailable ? CAPTURE_STRINGS.unavailable : active.length > 0 ? 'Capturing' : CAPTURE_STRINGS.off,
+      sublabel: clipboardUnavailable
+        ? `${active.length > 0 ? `${active.join(' · ')} still active. ` : ''}${CAPTURE_STRINGS.unavailableDetail}`
+        : active.length > 0 ? active.join(' · ') : 'All sources are off'
     })
     entries.push({ kind: 'separator' })
     if (input.includeAppItems) entries.push(...appItems, { kind: 'separator' })

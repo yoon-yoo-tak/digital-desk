@@ -30,7 +30,7 @@ export interface PasteboardEvent {
 interface HelperEvents {
   ready: []
   pasteboard: [PasteboardEvent]
-  /** Gave up restarting, or the binary is missing. */
+  /** Not running: crashed, couldn't start, or the binary is missing. May recover on `ready`. */
   unavailable: [reason: string]
 }
 
@@ -144,7 +144,8 @@ export class DeskHelper extends EventEmitter<HelperEvents> {
     createInterface({ input: child.stdout }).on('line', (line) => this.onLine(line))
     child.stderr.on('data', (chunk: Buffer) => console.warn('[desk-helper]', chunk.toString().trim()))
     child.on('error', (error) => console.error('[desk-helper] spawn failed', error))
-    child.on('exit', (code, signal) => {
+    // `close` also fires after a spawn error, unlike `exit`.
+    child.on('close', (code, signal) => {
       if (this.child !== child) return
       this.child = null
       this._running = false
@@ -155,6 +156,7 @@ export class DeskHelper extends EventEmitter<HelperEvents> {
       this.pending.clear()
       if (this.stopped) return
       console.warn(`[desk-helper] exited (code ${code}, signal ${signal})`)
+      this.emit('unavailable', 'desk-helper stopped; clipboard capture suspended')
       this.scheduleRestart()
     })
   }

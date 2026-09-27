@@ -237,6 +237,8 @@ Quick Search에는 삭제 단축키를 두지 않는다(입력창의 `⌘⌫`와
 
 ### 8.2 메뉴바 (`MenuBar.dc.html`)
 
+- 헬퍼가 중단되어 클립보드 수집을 보장할 수 없으면 메뉴 헤더·메인 창 상태·Quick Search 푸터에 `Clipboard unavailable`을 표시한다. 메뉴에는 계속 동작하는 파일 수집 소스와 앱 재시작 안내를 함께 표시한다. 사용자 Pause와 온보딩 상태가 이 안내보다 우선한다. 변경 이유: 개인정보 보호를 위해 헬퍼 없는 폴백 수집을 제거했으므로 실제 상태를 알린다.
+
 - 트레이 아이콘: 캡처 중일 때 `app-mark`, 일시정지일 때 `app-mark-paused`(점선)이다. 템플릿 이미지를 쓴다.
 - 메뉴(캡처 중): 상태 헤더(`● Capturing` + `Clipboard · Screenshots · Downloads`에서 켜진 소스만) → `Quick Search ⌘⇧Space` · `Open Digital Desk` → `Pause for 5 minutes` · `Pause for 30 minutes` · `Pause until resumed ⌥⌘P` → `Delete last 5 minutes…` · `Delete last hour…` → `Settings… ⌘,` · `Quit Digital Desk ⌘Q`
 - 메뉴(일시정지): 상태 헤더(`❚❚ Paused` + `Nothing is being captured until 14:52`) → `Resume capturing ⌥⌘P` · `Extend pause by 30 minutes` → `Quick Search` · `Open Digital Desk` → `Settings…`

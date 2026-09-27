@@ -1,14 +1,12 @@
 // All UI copy in one place (DESIGN §5: English UI, i18n-ready).
 
+import { CAPTURE_STRINGS } from '@shared/format/capture'
+
 export const strings = {
   appName: 'Digital Desk',
   views: { inbox: 'Inbox', desk: 'Desk', archive: 'Archive' },
   search: 'Search',
-  capture: {
-    capturing: 'Capturing',
-    paused: 'Paused',
-    fallback: 'App names are unavailable because the native helper is not running.'
-  },
+  capture: CAPTURE_STRINGS,
   empty: {
     inbox: { title: 'Nothing here yet.', body: 'Copy something, take a screenshot, or download a file.' },
     desk: { title: 'Your desk is clear.', body: "Pin things you're working on to keep them here. ⌘P" },

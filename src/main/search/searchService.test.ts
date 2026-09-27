@@ -1,5 +1,5 @@
 import Database from 'better-sqlite3'
-import { beforeAll, describe, expect, it } from 'vitest'
+import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import type { SearchResponse } from '@shared/types'
 import { buildDemoItems, lastWeekDay } from '../seed/demoData'
 import { migrate } from '../storage/db'
@@ -157,5 +157,54 @@ describe('seed dates', () => {
       const at = new Date(2026, 8, 21, hour, 30) // a Monday
       for (const item of buildDemoItems(at)) expect(item.capturedAt).toBeLessThanOrEqual(at.getTime())
     }
+  })
+})
+
+describe('search correctness beyond the former 500-candidate cutoff', () => {
+  let db: Database.Database
+  let localRepo: ItemsRepo
+  let service: SearchService
+  beforeEach(() => {
+    db = new Database(':memory:')
+    migrate(db)
+    localRepo = new ItemsRepo(db)
+    service = new SearchService(db)
+  })
+  afterEach(() => db.close())
+
+  it('finds old screenshots even when newer items all have another type', () => {
+    const screenshot = localRepo.insert({ type: 'screenshot', capturedAt: now - 60_000, sourceApp: 'Preview' })
+    localRepo.insertMany(Array.from({ length: 501 }, (_, i) => ({
+      type: 'text' as const, text: 'new', capturedAt: now - i, sourceApp: 'Terminal'
+    })))
+    const result = service.search('오늘 type:screenshot', {}, now)
+    expect(allHits(result).map((h) => h.item.id)).toEqual([screenshot.id])
+    expect(result.total).toBe(1)
+    expect(result.typeCounts).toMatchObject({ text: 501, screenshot: 1 })
+    expect(result.apps).toEqual(['Terminal', 'Preview'])
+  })
+
+  it('counts all matching items while displaying only 50, and ranks older pins', () => {
+    const pin = localRepo.insert({ type: 'text', text: 'pinned', capturedAt: now - 60_000, sourceApp: 'Safari', domain: 'example.com' })
+    localRepo.setPinned(pin.id, true)
+    localRepo.insertMany(Array.from({ length: 600 }, (_, i) => ({
+      type: 'text' as const, text: 'new', capturedAt: now - i, sourceApp: 'Safari', domain: 'example.com'
+    })))
+    for (const query of ['type:text', '오늘', 'app:Safari', 'domain:example.com']) {
+      const result = service.search(query, {}, now)
+      expect(result.total, query).toBe(601)
+      expect(result.typeCounts.text, query).toBe(601)
+      expect(allHits(result), query).toHaveLength(50)
+      expect(result.groups[0]?.hits[0]?.item.id, query).toBe(pin.id)
+    }
+  })
+
+  it('finds a recaptured item by its latest app in both keyword and filter searches', () => {
+    const item = localRepo.insert({ type: 'text', text: 'neutral payload', sourceApp: 'Chrome', capturedAt: now - 1000 })
+    localRepo.touch(item.id, now, { app: 'Safari', bundleId: 'com.apple.Safari' })
+    for (const query of ['Safari', 'app:Safari']) {
+      expect(allHits(service.search(query, {}, now)).map((h) => h.item.id)).toEqual([item.id])
+    }
+    expect(service.search('Chrome', {}, now).total).toBe(0)
   })
 })

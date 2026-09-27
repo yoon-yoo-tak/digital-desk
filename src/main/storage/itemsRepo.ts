@@ -180,9 +180,11 @@ export class ItemsRepo {
     })()
   }
 
-  /** Items captured at or after `since` (Delete last 5 minutes / hour). */
+  /** Items captured or recaptured at or after `since` (Delete last 5 minutes / hour). */
   capturedSince(since: number): DeskItem[] {
-    const rows = this.db.prepare('SELECT rowid, * FROM items WHERE captured_at >= ?').all(since) as ItemRow[]
+    const rows = this.db
+      .prepare('SELECT rowid, * FROM items WHERE captured_at >= ? OR last_used_at >= ?')
+      .all(since, since) as ItemRow[]
     return rows.map(toItem)
   }
 
@@ -226,13 +228,19 @@ export class ItemsRepo {
 
   /** Same content captured again: bump it to the top instead of duplicating. */
   touch(id: string, at: number, source?: { app: string | null; bundleId: string | null }): DeskItem | null {
-    this.db
-      .prepare(
-        `UPDATE items SET last_used_at = ?, use_count = use_count + 1,
-           source_app = COALESCE(?, source_app), source_bundle_id = COALESCE(?, source_bundle_id)
-         WHERE id = ?`
-      )
-      .run(at, source?.app ?? null, source?.bundleId ?? null, id)
+    this.db.transaction(() => {
+      this.db
+        .prepare(
+          `UPDATE items SET last_used_at = ?, use_count = use_count + 1,
+             source_app = COALESCE(?, source_app), source_bundle_id = COALESCE(?, source_bundle_id)
+           WHERE id = ?`
+        )
+        .run(at, source?.app ?? null, source?.bundleId ?? null, id)
+      if (source?.app != null) {
+        const row = this.db.prepare('SELECT rowid FROM items WHERE id = ?').get(id) as { rowid: number } | undefined
+        if (row) this.syncFts(row.rowid)
+      }
+    })()
     return this.get(id)
   }
 

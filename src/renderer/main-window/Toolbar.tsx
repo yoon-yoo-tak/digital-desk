@@ -1,4 +1,5 @@
 import type { CaptureStatus, View } from '@shared/types'
+import { captureLabel } from '@shared/format/capture'
 import { Icon } from '../shared/Icon'
 import { strings } from '../shared/strings'
 import styles from './Toolbar.module.css'
@@ -40,7 +41,7 @@ export function Toolbar({ view, onViewChange, status }: Props): React.JSX.Elemen
       <button
         className={styles.pill}
         onClick={openCaptureMenu}
-        title={status?.helper === 'fallback' ? strings.capture.fallback : undefined}
+        title={status?.helper === 'unavailable' ? strings.capture.unavailableDetail : undefined}
         aria-haspopup="menu"
       >
         {paused ? (
@@ -48,7 +49,7 @@ export function Toolbar({ view, onViewChange, status }: Props): React.JSX.Elemen
         ) : (
           <span className={styles.dot} />
         )}
-        {paused ? strings.capture.paused : strings.capture.capturing}
+        {captureLabel(status)}
       </button>
       <button className={styles.search} onClick={() => window.desk.ui.openQuickSearch()} aria-label="Search  ⌘K">
         <Icon name="search" size={14} />
