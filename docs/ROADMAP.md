@@ -22,7 +22,7 @@ P0 = ALEN CUP 데모에 반드시 필요(PRODUCT §40). P1 = P0 이후(§41). P2
 - [x] 스크립트: `dev` `build` `typecheck` `lint` `test` `build:helper`. `postinstall`에서 네이티브 모듈 재빌드
 - [x] `design/tokens.css` import, JetBrains Mono 번들, `design/icons` 기반 `<Icon>` 컴포넌트
 - [x] `desk-helper` Swift: build.sh, JSON-lines, `pasteboard` 이벤트 스트림, `frontmost`
-- [x] 헬퍼 프로세스 관리(재시작, 없을 때의 폴백 모드)
+- [x] 헬퍼 프로세스 관리(재시작, 없을 때의 폴백 모드) — 폴백 모드는 2026-09-27에 제거했다(아래 신뢰성 보강)
 - [x] SQLite: 마이그레이션 러너, migration 001, itemsRepo(FTS 동기화 포함), assets
 - [x] ClipboardWatcher: text / link / image / file-ref, 중복 처리, concealed와 제외 앱 차단, selfWrites 무시
 - [x] 메인 창: 툴바, Inbox 타임라인(날짜 그룹, 행 52), Inspector(text/link/image/file)

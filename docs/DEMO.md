@@ -91,6 +91,7 @@ Desktop, Downloads, Chrome 방문 기록, Finder 검색을 차례로 보여 준�
 | 스크린샷 제목이 파일명 그대로다 | 첫 OCR 준비 중(설치 직후) | 30초 뒤 다시 확인한다. 아니면 Settings › Capture › Read text in screenshots가 켜져 있는지 본다 |
 | 다운로드가 안 보인다 | 저장한 위치 | 다운로드 폴더와 데스크탑(브라우저가 받은 파일)만 기록한다. 다른 폴더는 기록하지 않는다 |
 | 아무것도 기록되지 않는다 | 메뉴바 아이콘이 점선인지(일시정지) | 메뉴바 › Resume capturing 또는 ⌥⌘P |
+| 복사한 것만 기록되지 않는다 | 메뉴바·검색창에 `Clipboard unavailable`이 보이는지(헬퍼 중단) | 잠시 뒤 자동으로 다시 시작한다. 계속되면 앱을 종료했다가 다시 연다. 그동안 스크린샷·다운로드는 계속 기록된다 |
 | ⌘⇧Space가 안 된다 | Settings › Shortcuts의 빨간 테두리 | 다른 조합으로 바꾼다. 메뉴바 › Quick Search로도 열 수 있다 |
 
 ---

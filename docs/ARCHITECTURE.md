@@ -49,7 +49,7 @@ src/
     types.ts               DeskItem, ItemType, SearchResponse …
     ipc.ts                 IPC 채널 이름과 타입 계약
     query/                 parseQuery, dateExpressions, synonyms  (+ *.test.ts)
-    format/                시간 표기(DESIGN §5)                  (+ *.test.ts)
+    format/                시간 표기(DESIGN §5), 아이템 표시, 단축키, 캡처 상태 문구(capture.ts)  (+ *.test.ts)
   main/
     index.ts               앱 부트스트랩, 단일 인스턴스, Dock 정책
     clock.ts               벽시계를 읽는 유일한 곳(Clock 주입)
@@ -61,7 +61,7 @@ src/
     helper/                desk-helper 프로세스 관리 + JSON-lines 클라이언트
     capture/               classify.ts(순수), clipboardWatcher.ts, electronClipboard.ts(헬퍼 가용성 확인 리더), captureState.ts(pause)
                            screenshotWatcher.ts, downloadWatcher.ts (M3)
-    indexing/              ocrQueue.ts, titles.ts(제목 추출), linkTitles.ts, thumbnails.ts
+    indexing/              ocrQueue.ts, linkTitle.ts(제목 파싱·리다이렉트), publicHttp.ts(공개 IPv4 DNS 검사 요청, §6.4)
     search/                searchService.ts, ranking.ts, sessions.ts  (+ *.test.ts, search.bench.test.ts)
     seed/                  demoData.ts(순수, 날짜는 now 기준), runSeed.ts(`npm run seed`, Electron 안에서 실행)
     storage/               db.ts, migrations.ts, ids.ts(monotonic ULID), itemsRepo.ts, settingsRepo.ts, assets.ts, retention.ts(M4)
@@ -120,7 +120,7 @@ assets/images/     클립보드 이미지 원본(PNG)
 assets/thumbs/     썸네일(최대 640px 긴 변, PNG)
 ```
 
-### 스키마 (migration 001)
+### 스키마 (migration 001, 002는 FTS 재구축만 — §6.1 중복 처리)
 
 ```sql
 CREATE TABLE items (

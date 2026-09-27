@@ -76,7 +76,7 @@ UI 라이브러리와 Tailwind는 쓰지 않는다. CSS Modules와 `design/token
 ## 구현 규칙
 
 - **사용자 원본 파일은 절대 수정·이동·삭제하지 않는다.** 아이템 삭제는 DB 행과 앱이 만든 assets만 지운다.
-- 캡처는 `captureState.shouldCapture(app)`를 먼저 통과해야 한다. 일시정지 중이거나 제외 앱이거나 `concealed` 클립보드면 **내용을 읽지도 않는다.**
+- 캡처는 `captureState.shouldCapture(app)`를 먼저 통과해야 한다. 일시정지 중이거나, 제외 앱이거나, 출처 앱(bundle id)을 확인할 수 없거나(헬퍼 중단 포함), `concealed` 클립보드면 **내용을 읽지도 않는다.** 헬퍼 없이 클립보드를 읽는 폴백은 만들지 않는다(ARCHITECTURE §5).
 - 순수 로직(쿼리 파싱, 날짜, 동의어, 점수, 세션, 제목 추출, 해시, 시간 표기)은 `src/shared` 또는 main의 순수 모듈에 두고 **단위 테스트를 같이 쓴다.** 현재 시각은 인자로 주입받는다(`now`). `Date.now()`를 직접 부르지 않는다.
 - 날짜 경계는 로컬 타임존이고, 주는 **월요일**에 시작한다. DB 시간은 epoch ms다.
 - renderer는 Node와 파일 경로에 직접 접근하지 않는다. `window.desk`(preload)와 `desk-asset://` 프로토콜만 쓴다. `contextIsolation`과 `sandbox`는 항상 켠다.
